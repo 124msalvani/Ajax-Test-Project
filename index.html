@@ -3,14 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet" type="text/css" />
     <title>First AJAX</title>
 </head>
 <body>
     
+    <p id="word">Test</p>
+    <button id="btn">Get Only One</button>
 
 
+    <script>
+        let myRequest = new XMLHttpRequest();
+        myRequest.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200){
+                document.getElementById("word").innerHTML = myRequest.responseText;
+            }
+        };
+        
+        myRequest.open("GET", "wordbank.txt");
+        myRequest.send();
 
-    <script src="script.js"></script>
+
+            document.getElementById("btn").addEventListener("click",getOneWord)
+            function getOneWord(){
+              let myArray =  myRequest.responseText.split(", ");
+              console.log(myArray);
+            };
+
+    </script>
 </body>
 </html>
